@@ -3,7 +3,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
+// using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -63,7 +63,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         statusText.text = "Joined: " + PhotonNetwork.CurrentRoom.Name;
         canvas.SetActive(false);
-        PhotonNetwork.LoadLevel("MeetingRoom");
+        // PhotonNetwork.LoadLevel("MeetingRoom");
 
         if (meetingCanvas != null)
             meetingCanvas.SetActive(true);
