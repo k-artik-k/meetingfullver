@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.7, y: -0.1, z: 4.0255}
-  m_LocalScale: {x: 0.58, y: 0.58, z: 0.58}
+  m_LocalScale: {x: 1.6799998, y: 1.6799998, z: 1.6799998}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3732031220405323490}
@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eed889375a74684199b01456389dfbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  leftHand: {fileID: 165388745043740884}
+  rightHand: {fileID: 818451374020519951}
 --- !u!114 &2915374391299433003
 MonoBehaviour:
   m_ObjectHideFlags: 0

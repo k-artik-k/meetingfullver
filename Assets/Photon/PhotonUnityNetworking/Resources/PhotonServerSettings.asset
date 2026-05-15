@@ -42,6 +42,7 @@ MonoBehaviour:
   - CantHearYou
   - ChangeColour
   - HeresWhy
+  - SyncImage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

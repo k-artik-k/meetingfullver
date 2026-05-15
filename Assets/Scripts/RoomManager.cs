@@ -3,6 +3,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -12,11 +13,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public Button createButton;
     public Button joinButton;
     public GameObject canvas;
+    public GameObject meetingCanvas;
 
     void Start()
     {
         createButton.interactable = false;
         joinButton.interactable = false;
+        if (meetingCanvas != null)
+            meetingCanvas.SetActive(false);
     }
 
     public void CreateRoom()
@@ -59,6 +63,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         statusText.text = "Joined: " + PhotonNetwork.CurrentRoom.Name;
         canvas.SetActive(false);
+        PhotonNetwork.LoadLevel("MeetingRoom");
+
+        if (meetingCanvas != null)
+            meetingCanvas.SetActive(true);
     }
 
     public override void OnJoinedLobby()
