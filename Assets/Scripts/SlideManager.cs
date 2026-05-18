@@ -31,6 +31,7 @@ public class SlideManager : MonoBehaviourPun
 
     public void OpenFiles()
     {
+        Camera.main.enabled = true;
         string[] paths = StandaloneFileBrowser.OpenFilePanel(
             "Select Images", "",
             new[] { new ExtensionFilter("Images", "png", "jpg", "jpeg") },
@@ -38,6 +39,10 @@ public class SlideManager : MonoBehaviourPun
         );
 
         if (paths.Length == 0) return;
+        // Force Unity to reclaim focus
+        #if UNITY_EDITOR
+         UnityEditor.EditorWindow.focusedWindow?.Focus();
+        #endif
 
         slides = new Texture2D[paths.Length];
         for (int i = 0; i < paths.Length; i++)
@@ -97,10 +102,11 @@ public class SlideManager : MonoBehaviourPun
         Texture2D tex = slides[index];
         screenRenderer.material.mainTexture = tex;
 
-        float aspect = (float)tex.width / tex.height;
-        screenRenderer.transform.localScale = new Vector3(aspect * 4f, 4f, 1f);
+        // float aspect = (float)tex.width / tex.height;
+        // screenRenderer.transform.localScale = new Vector3(aspect * 4f, 4f, 1f);
 
         if (slideCountText != null)
             slideCountText.text = (index + 1) + " / " + slides.Length;
     }
+    
 }

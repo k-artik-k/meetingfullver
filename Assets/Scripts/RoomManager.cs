@@ -3,7 +3,6 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-// using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -13,14 +12,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public Button createButton;
     public Button joinButton;
     public GameObject canvas;
-    public GameObject meetingCanvas;
-
+void Awake()
+{
+    DontDestroyOnLoad(gameObject);
+}
     void Start()
     {
         createButton.interactable = false;
         joinButton.interactable = false;
-        if (meetingCanvas != null)
-            meetingCanvas.SetActive(false);
     }
 
     public void CreateRoom()
@@ -51,22 +50,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        string storedPass = (string)PhotonNetwork.CurrentRoom.CustomProperties["password"];
-        string enteredPass = passwordInput.text;
-
-        if (storedPass != enteredPass)
-        {
-            statusText.text = "Wrong password!";
-            PhotonNetwork.LeaveRoom();
-            return;
-        }
-
-        statusText.text = "Joined: " + PhotonNetwork.CurrentRoom.Name;
+        Debug.Log("OnJoinedRoom! IsMaster: " + PhotonNetwork.IsMasterClient);
         canvas.SetActive(false);
-        // PhotonNetwork.LoadLevel("MeetingRoom");
-
-        if (meetingCanvas != null)
-            meetingCanvas.SetActive(true);
+        PhotonNetwork.LoadLevel(1);
     }
 
     public override void OnJoinedLobby()
@@ -76,8 +62,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
         statusText.text = "Ready!";
     }
 
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        statusText.text = "Create failed: " + message;
+        Debug.LogError("Create failed: " + message);
+    }
+
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         statusText.text = "Room not found!";
+        Debug.LogError("Join failed: " + message);
     }
 }

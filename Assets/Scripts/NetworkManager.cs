@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    private static NetworkManager instance;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.AutomaticallySyncScene = true;
+        if (!PhotonNetwork.IsConnected)
+            PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected! Joining lobby...");
-        PhotonNetwork.JoinLobby();
-    }
-
-    public override void OnJoinedLobby()
-    {
-        Debug.Log("In lobby, ready!");
+        if (!PhotonNetwork.InRoom)
+            PhotonNetwork.JoinLobby();
     }
 }
