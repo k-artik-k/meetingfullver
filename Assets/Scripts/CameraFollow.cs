@@ -8,14 +8,21 @@ public class CameraFollow : MonoBehaviour
     public void SetTarget(Transform t)
     {
         target = t;
+        Debug.Log("Camera target set: " + t.name);
     }
 
     void LateUpdate()
     {
-        if (target != null)
+        if (target == null)
         {
-            transform.position = target.position + offset;
-            transform.rotation = target.rotation;
+            // Find avatar if target lost
+            GameObject avatar = GameObject.FindWithTag("Player");
+            if (avatar != null)
+                target = avatar.transform;
+            return;
         }
+
+        transform.position = target.position + offset;
+        transform.rotation = target.rotation;
     }
 }
