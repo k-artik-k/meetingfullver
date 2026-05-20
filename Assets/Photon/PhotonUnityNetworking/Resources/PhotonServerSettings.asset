@@ -16,7 +16,7 @@ MonoBehaviour:
     AppIdRealtime: 72f66f32-865d-4bb3-b985-2201dba7662f
     AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: 2add1c3f-62df-4137-987d-85139de188ad
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
@@ -46,5 +46,5 @@ MonoBehaviour:
   - SyncSlide
   - ReceiveSlide
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1

@@ -8,14 +8,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public TMP_InputField roomCodeInput;
     public TMP_InputField passwordInput;
+    public TMP_InputField playerNameInput;
     public TMP_Text statusText;
     public Button createButton;
     public Button joinButton;
     public GameObject canvas;
-void Awake()
-{
-    DontDestroyOnLoad(gameObject);
-}
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         createButton.interactable = false;
@@ -24,6 +27,8 @@ void Awake()
 
     public void CreateRoom()
     {
+        PhotonNetwork.NickName = playerNameInput.text == "" ? "Player" : playerNameInput.text;
+
         string code = roomCodeInput.text;
         string pass = passwordInput.text;
 
@@ -41,6 +46,8 @@ void Awake()
 
     public void JoinRoom()
     {
+        PhotonNetwork.NickName = playerNameInput.text == "" ? "Player" : playerNameInput.text;
+
         string code = roomCodeInput.text;
         string pass = passwordInput.text;
 
